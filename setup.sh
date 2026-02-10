@@ -18,24 +18,14 @@ if ! command -v make &> /dev/null; then
     exit 1
 fi
 
-# Create gruppy directory
-echo "📁 Creating gruppy directory..."
+# Clone the private EnvironmentSetup repository as gruppy directory
+echo "📦 Cloning EnvironmentSetup repository..."
 if [ -d "gruppy" ]; then
     echo "⚠️  gruppy directory already exists."
-else
-    mkdir gruppy
-fi
-
-cd gruppy
-
-# Clone the private EnvironmentSetup repository
-echo "📦 Cloning EnvironmentSetup repository..."
-if [ -d "EnvironmentSetup" ]; then
-    echo "⚠️  EnvironmentSetup directory already exists. Skipping clone."
-    cd EnvironmentSetup
+    cd gruppy
     git pull origin master || true
 else
-    if ! git clone git@github.com:LinkedFarma/EnvironmentSetup.git; then
+    if ! git clone git@github.com:LinkedFarma/EnvironmentSetup.git gruppy; then
         echo ""
         echo "❌ Failed to clone EnvironmentSetup repository."
         echo ""
@@ -47,7 +37,7 @@ else
         echo ""
         exit 1
     fi
-    cd EnvironmentSetup
+    cd gruppy
 fi
 
 echo ""
